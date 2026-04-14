@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CreedMarket | Uganda's Vibrant Marketplace</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fef9f0 0%, #f0f9f4 100%);
+            color: #1a2e2a;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* animated gradient background shift */
+        @keyframes gradientShift {
+            0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            25% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+            50% { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+            75% { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+            100% { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        }
+        
+        @keyframes softPulse {
+            0% { opacity: 0.6; transform: scale(1);}
+            100% { opacity: 1; transform: scale(1.02);}
+        }
+
+        .navbar {
+            background: rgba(10, 46, 37, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(244, 162, 97, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-icon {
+            background: linear-gradient(145deg, #f4a261, #e76f51);
+            width: 52px;
+            height: 52px;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            font-weight: bold;
+            color: #0a2e25;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            animation: softPulse 2s infinite alternate;
+        }
+        .brand-text h1 {
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+            color: white;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #f4a261);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .brand-text p {
+            font-size: 0.7rem;
+            color: #f4a261;
+            font-weight: 500;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(4px);
+        }
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        .nav-btn:hover {
+            background: #f4a261;
+            color: #0a2e25;
+            transform: translateY(-2px);
+        }
+        .cart-badge {
+            background: #f4a261;
+            padding: 8px 20px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #0a2e25;
+            transition: 0.2s;
+        }
+        .cart-badge:hover {
+            background: #ffb347;
+            transform: scale(1.02);
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(120deg, #fff6e8, #e8f3ef);
+            padding: 2rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(244, 162, 97, 0.3);
+        }
+        .hero h2 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #0a2e25, #e76f51);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+        .hero span {
+            color: #e76f51;
+        }
+        .search-bar {
+            max-width: 620px;
+            width: 90%;
+            margin: 1.5rem auto 0;
+            padding: 14px 24px;
+            border-radius: 60px;
+            border: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s;
+        }
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.5);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* empty state */
+        .empty-marketplace {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 36px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            border: 1px solid rgba(244, 162, 97, 0.5);
+        }
+        .empty-marketplace i {
+            font-size: 4rem;
+            color: #f4a261;
+            margin-bottom: 1rem;
+            animation: softPulse 1.5s infinite alternate;
+        }
+
+        /* products grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(244, 162, 97, 0.3);
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 32px -12px rgba(0,0,0,0.2);
+            background: white;
+            border-color: #f4a261;
+        }
+        .product-img {
+            background: linear-gradient(145deg, #fef5e7, #fff0e0);
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.2rem;
+        }
+        .product-info {
+            padding: 1.2rem;
+        }
+        .product-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #1a3a32;
+        }
+        .vendor-contact {
+            background: #fef2e8;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #e76f51;
+            margin: 8px 0;
+            flex-wrap: wrap;
+        }
+        .vendor-contact a {
+            text-decoration: none;
+            color: #0a2e25;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: white;
+            padding: 4px 12px;
+            border-radius: 32px;
+            transition: 0.2s;
+        }
+        .vendor-contact a:hover {
+            background: #25D366;
+            color: white;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0a2e25, #e76f51);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .add-cart {
+            background: linear-gradient(95deg, #0a2e25, #1e6b4c);
+            width: 100%;
+            border: none;
+            padding: 12px;
+            border-radius: 44px;
+            color: white;
+            font-weight: 700;
+            margin-top: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .add-cart:hover {
+            background: linear-gradient(95deg, #f4a261, #e76f51);
+            color: #0a2e25;
+        }
+
+        /* modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 36px;
+            padding: 1.8rem;
+            max-width: 560px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.2);
+            border: 1px solid rgba(244, 162, 97, 0.5);
+        }
+        .modal-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #0a2e25;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-radius: 32px;
+            border: 1.5px solid #e2e8f0;
+            background: #fff;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #f4a261;
+            box-shadow: 0 0 0 2px rgba(244,162,97,0.3);
+        }
+        button {
+            background: #0a2e25;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .approve-btn {
+            background: #f4a261;
+            color: #0a2e25;
+        }
+        .edit-price-btn {
+            background: #f4a261;
+            color: #0a2e25;
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            margin-left: 10px;
+        }
+        footer {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.85rem;
+        }
+        .toast-success {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(95deg, #1e6b4c, #0a2e25);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 60px;
+            z-index: 1200;
+            font-weight: 600;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        }
+        @media (max-width: 680px) {
+            .navbar { flex-direction: column; align-items: stretch; text-align: center; padding: 1rem; }
+            .nav-actions { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand">
+        <div class="logo-icon">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="brand-text">
+            <h1>CreedMarket</h1>
+            <p><i class="fas fa-map-marker-alt"></i> Uganda's vibrant bazaar</p>
+        </div>
+    </div>
+    <div class="nav-actions">
+        <button class="nav-btn" id="homeBtnNav"><i class="fas fa-home"></i> Home</button>
+        <button class="nav-btn" id="sellerApplyNav"><i class="fas fa-hand-holding-usd"></i> Start Selling</button>
+        <button class="nav-btn" id="vendorDashNav"><i class="fas fa-tachometer-alt"></i> Vendor Hub</button>
+        <button class="nav-btn" id="adminNavAccess"><i class="fas fa-user-shield"></i> Admin</button>
+        <div class="cart-badge" id="cartBtnHeader"><i class="fas fa-shopping-basket"></i> Cart <span id="cartCountNumber">0</span></div>
+    </div>
+</nav>
+
+<section class="hero">
+    <h2><span>CreedMarket</span> – connect with local vendors directly</h2>
+    <p style="margin-top: 6px;">📞 Tap any vendor phone number to call or message on WhatsApp</p>
+    <input type="text" id="globalSearchField" class="search-bar" placeholder="🔍 Search products, vendors or categories...">
+</section>
+
+<div class="container">
+    <div id="marketplaceRoot"></div>
+</div>
+
+<footer>
+    <p><i class="fas fa-phone-alt"></i> Vendor support: <strong>0709298041</strong> (MTN / Airtel Money)</p>
+    <p style="margin-top: 0.3rem;">© 2025 CreedMarket — tap to connect with vendors</p>
+</footer>
+
+<!-- Cart Modal -->
+<div id="cartModalGlobal" class="modal">
+    <div class="modal-card">
+        <span id="closeCartModal" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span>
+        <h3><i class="fas fa-shopping-cart"></i> Your cart</h3>
+        <div id="cartItemsContainer"></div>
+        <div id="cartTotalAmount" style="font-weight:bold; margin:1rem 0; font-size:1.3rem;"></div>
+        <button id="realCheckoutBtn"><i class="fas fa-check-circle"></i> Place order</button>
+        <div id="orderStatusMsg"></div>
+    </div>
+</div>
+
+<!-- Seller Registration Modal -->
+<div id="registerSellerModal" class="modal">
+    <div class="modal-card">
+        <span id="closeRegModalBtn" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span>
+        <h3><i class="fas fa-store"></i> Join as a vendor</h3>
+        <div style="background:#f1f5f9; border-radius: 28px; padding: 1rem; margin: 0.8rem 0; text-align:center;">
+            <i class="fas fa-mobile-alt fa-2x"></i>
+            <p><strong>Vendor registration contribution:</strong></p>
+            <span style="font-size:1.8rem; font-weight:800;">5,000 UGX</span><br>
+            <small>MTN MoMo / Airtel Money to 0709298041</small>
+        </div>
+        <p><strong>After payment, complete the form below.</strong></p>
+        <input type="text" id="regNameField" placeholder="Full name / Business name">
+        <input type="text" id="regPhoneField" placeholder="Your phone number (will be clickable for buyers)">
+        <input type="text" id="regTransactionField" placeholder="Transaction reference">
+        <button id="submitPaymentRequestBtn"><i class="fas fa-paper-plane"></i> Submit request</button>
+        <div id="regMessageArea" style="margin-top: 12px;"></div>
+    </div>
+</div>
+
+<!-- Vendor Dashboard -->
+<div id="vendorDashboardModal" class="modal">
+    <div class="modal-card">
+        <span id="closeVendorDash" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span>
+        <h3><i class="fas fa-chart-line"></i> Vendor dashboard</h3>
+        <div id="vendorLoginSection">
+            <input type="text" id="vendorPhoneLoginInput" placeholder="Enter your phone number">
+            <button id="vendorLoginAction"><i class="fas fa-key"></i> Access my shop</button>
+        </div>
+        <div id="vendorInnerPanel" style="display:none; margin-top: 20px;">
+            <h4><i class="fas fa-plus-circle"></i> Add new product</h4>
+            <input type="text" id="addProdName" placeholder="Product name">
+            <input type="number" id="addProdPrice" placeholder="Price (UGX)" value="0">
+            <select id="addProdCategory">
+                <option>Fresh Foods</option><option>Electronics</option><option>Fashion</option><option>Home & Living</option>
+            </select>
+            <input type="text" id="addProdDesc" placeholder="Short description">
+            <input type="text" id="addProdIcon" placeholder="Emoji (e.g 🥭, 👕)" value="📦">
+            <button id="publishProductBtn"><i class="fas fa-cloud-upload-alt"></i> Publish listing</button>
+            <hr style="margin: 1.2rem 0;">
+            <h4>📦 Your products</h4>
+            <div id="vendorProductsList"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Panel -->
+<div id="adminGlobalModal" class="modal">
+    <div class="modal-card">
+        <span id="closeAdminModal" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span>
+        <h3><i class="fas fa-shield-alt"></i> Admin zone</h3>
+        <input type="password" id="adminPasswordInput" placeholder="Admin password">
+        <button id="adminLoginBtnGlobal">Unlock</button>
+        <div id="adminSecureContent" style="display:none; margin-top: 1.5rem;">
+            <h4>⏳ Pending vendor requests</h4>
+            <div id="pendingVendorsAdminList"></div>
+            <h4 style="margin-top: 1rem;">✅ Active vendors</h4>
+            <div id="approvedVendorsAdminList"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Price Modal -->
+<div id="editPriceModal" class="modal">
+    <div class="modal-card">
+        <span id="closeEditModal" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span>
+        <h3><i class="fas fa-edit"></i> Update price</h3>
+        <p id="editProductNameDisplay" style="font-weight:600;"></p>
+        <input type="number" id="editPriceInput" placeholder="New price (UGX)">
+        <button id="confirmEditPriceBtn">Save changes</button>
+        <div id="editPriceFeedback"></div>
+    </div>
+</div>
+
+<script>
+    // ---------- DATA ----------
+    let approvedVendors = JSON.parse(localStorage.getItem('CreedMarket_approvedVendors')) || [];
+    let pendingVendors = JSON.parse(localStorage.getItem('CreedMarket_pendingVendors')) || [];
+    let allProducts = JSON.parse(localStorage.getItem('CreedMarket_products')) || [];
+    let shoppingCart = JSON.parse(localStorage.getItem('CreedMarket_cart')) || [];
+
+    const ADMIN_CODE = "creed123";
+    let currentEditProductId = null;
+
+    function syncStorage() {
+        localStorage.setItem('CreedMarket_approvedVendors', JSON.stringify(approvedVendors));
+        localStorage.setItem('CreedMarket_pendingVendors', JSON.stringify(pendingVendors));
+        localStorage.setItem('CreedMarket_products', JSON.stringify(allProducts));
+        localStorage.setItem('CreedMarket_cart', JSON.stringify(shoppingCart));
+    }
+
+    function showToast(message) {
+        let toast = document.createElement('div');
+        toast.className = 'toast-success';
+        toast.innerText = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2200);
+    }
+
+    function updateCartUI() {
+        let total = shoppingCart.reduce((acc, i) => acc + i.quantity, 0);
+        document.getElementById('cartCountNumber').innerText = total;
+    }
+
+    // format phone for clickable links (call & whatsapp)
+    function formatPhoneLinks(phone) {
+        let cleanPhone = phone.replace(/\s+/g, '').replace(/^0/, '256'); // convert 07xx to 2567xx
+        if (!cleanPhone.startsWith('256') && cleanPhone.length === 10) cleanPhone = '256' + cleanPhone.substring(1);
+        const callLink = `tel:${cleanPhone}`;
+        const waLink = `https://wa.me/${cleanPhone}`;
+        return `<a href="${callLink}" target="_blank"><i class="fas fa-phone-alt"></i> Call</a>
+                <a href="${waLink}" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>`;
+    }
+
+    function renderMarketplace() {
+        const searchTerm = document.getElementById('globalSearchField')?.value.toLowerCase() || "";
+        let filtered = allProducts.filter(p => 
+            p.name.toLowerCase().includes(searchTerm) || 
+            p.category.toLowerCase().includes(searchTerm) ||
+            p.vendorName.toLowerCase().includes(searchTerm)
+        );
+        const container = document.getElementById('marketplaceRoot');
+        if (!container) return;
+        if (allProducts.length === 0) {
+            container.innerHTML = `
+                <div class="empty-marketplace">
+                    <i class="fas fa-store"></i>
+                    <h3>✨ Welcome to CreedMarket ✨</h3>
+                    <p>Discover amazing products from local vendors. Be the first to list your items!</p>
+                    <button id="quickApplyBtnEmpty" style="margin-top: 1rem; background:#f4a261; color:#0a2e25;"><i class="fas fa-rocket"></i> Start selling today</button>
+                </div>
+            `;
+            const quickBtn = document.getElementById('quickApplyBtnEmpty');
+            if(quickBtn) quickBtn.onclick = () => document.getElementById('registerSellerModal').style.display = 'flex';
+            return;
+        }
+        if(filtered.length === 0) {
+            container.innerHTML = `<div class="empty-marketplace"><i class="fas fa-search"></i><p>No matching products. Try another search.</p></div>`;
+            return;
+        }
+        let gridHtml = `<div class="products-grid">`;
+        filtered.forEach(prod => {
+            const contactLinks = prod.vendorPhone ? formatPhoneLinks(prod.vendorPhone) : '<span>No contact</span>';
+            gridHtml += `
+                <div class="product-card">
+                    <div class="product-img">${prod.icon || '🛒'}</div>
+                    <div class="product-info">
+                        <div class="product-title">${escapeHtml(prod.name)}</div>
+                        <div class="vendor-contact">
+                            <i class="fas fa-store"></i> ${escapeHtml(prod.vendorName)}
+                            <span style="margin-left:auto;">${contactLinks}</span>
+                        </div>
+                        <div class="price">UGX ${prod.price.toLocaleString()}</div>
+                        <div class="description" style="font-size:0.8rem; color:#475569; margin-bottom:8px;">${escapeHtml(prod.description)}</div>
+                        <button class="add-to-cart-item" data-id="${prod.id}"><i class="fas fa-cart-plus"></i> Add to cart</button>
+                    </div>
+                </div>
+            `;
+        });
+        gridHtml += `</div>`;
+        container.innerHTML = gridHtml;
+        document.querySelectorAll('.add-to-cart-item').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                let id = parseInt(btn.dataset.id);
+                addToCart(id);
+            });
+        });
+    }
+
+    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; return m;});}
+
+    function addToCart(prodId) {
+        const prod = allProducts.find(p => p.id === prodId);
+        if(prod) {
+            let existing = shoppingCart.find(i => i.id === prodId);
+            if(existing) existing.quantity++;
+            else shoppingCart.push({ id: prod.id, name: prod.name, price: prod.price, quantity: 1, vendor: prod.vendorName });
+            syncStorage();
+            updateCartUI();
+            showToast(`✓ ${prod.name} added`);
+        }
+    }
+
+    // Cart modal
+    const cartModal = document.getElementById('cartModalGlobal');
+    document.getElementById('cartBtnHeader').onclick = () => openCartModal();
+    document.getElementById('closeCartModal').onclick = () => cartModal.style.display = 'none';
+    function openCartModal() {
+        let itemsHtml = "", total = 0;
+        shoppingCart.forEach((item, idx) => {
+            let itemSum = item.price * item.quantity;
+            total += itemSum;
+            itemsHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #e2e8f0; padding:8px 0;">
+                <div><strong>${item.name}</strong> x${item.quantity}</div>
+                <div>UGX ${itemSum.toLocaleString()} <button style="background:#e76f51; padding:4px 12px;" onclick="removeCartItem(${idx})">Remove</button></div>
+            </div>`;
+        });
+        document.getElementById('cartItemsContainer').innerHTML = itemsHtml || "<p>Cart is empty</p>";
+        document.getElementById('cartTotalAmount').innerHTML = `Total: UGX ${total.toLocaleString()}`;
+        cartModal.style.display = 'flex';
+    }
+    window.removeCartItem = (idx) => {
+        shoppingCart.splice(idx,1);
+        syncStorage();
+        updateCartUI();
+        openCartModal();
+        renderMarketplace();
+    };
+    document.getElementById('realCheckoutBtn').onclick = () => {
+        if(shoppingCart.length === 0) { alert("Cart empty"); return; }
+        document.getElementById('orderStatusMsg').innerHTML = "<div style='background:#d1fae5; padding:12px; border-radius:20px;'>✅ Order placed! Vendors will be notified. Thank you for supporting local business.</div>";
+        shoppingCart = [];
+        syncStorage();
+        updateCartUI();
+        setTimeout(() => cartModal.style.display = 'none', 1800);
+        renderMarketplace();
+    };
+
+    // Seller registration
+    const regModal = document.getElementById('registerSellerModal');
+    document.getElementById('sellerApplyNav').onclick = () => regModal.style.display = 'flex';
+    document.getElementById('closeRegModalBtn').onclick = () => regModal.style.display = 'none';
+    document.getElementById('submitPaymentRequestBtn').onclick = () => {
+        let name = document.getElementById('regNameField').value.trim();
+        let phone = document.getElementById('regPhoneField').value.trim();
+        let txId = document.getElementById('regTransactionField').value.trim();
+        if(!name || !phone || !txId) { alert("Please fill all fields"); return; }
+        if(approvedVendors.find(v => v.phone === phone)) { alert("You're already an active vendor"); return; }
+        if(pendingVendors.find(v => v.phone === phone)) { alert("Request already pending"); return; }
+        pendingVendors.push({ name, phone, transactionId: txId });
+        syncStorage();
+        document.getElementById('regMessageArea').innerHTML = "<span style='color:#1e6b4c;'>✔️ Request sent! Admin will review shortly.</span>";
+        setTimeout(() => regModal.style.display = 'none', 2000);
+        document.getElementById('regNameField').value = "";
+        document.getElementById('regPhoneField').value = "";
+        document.getElementById('regTransactionField').value = "";
+    };
+
+    // Vendor dashboard
+    const vendorModal = document.getElementById('vendorDashboardModal');
+    document.getElementById('vendorDashNav').onclick = () => vendorModal.style.display = 'flex';
+    document.getElementById('closeVendorDash').onclick = () => vendorModal.style.display = 'none';
+    let currentVendorPhone = null;
+    document.getElementById('vendorLoginAction').onclick = () => {
+        let phone = document.getElementById('vendorPhoneLoginInput').value.trim();
+        let approved = approvedVendors.find(v => v.phone === phone);
+        if(approved) {
+            currentVendorPhone = phone;
+            document.getElementById('vendorLoginSection').style.display = 'none';
+            document.getElementById('vendorInnerPanel').style.display = 'block';
+            loadVendorProducts();
+        } else {
+            alert("Access pending: complete vendor registration and await approval.");
+        }
+    };
+    function loadVendorProducts() {
+        let myProducts = allProducts.filter(p => p.vendorPhone === currentVendorPhone);
+        let container = document.getElementById('vendorProductsList');
+        if(container) {
+            container.innerHTML = myProducts.map(prod => `
+                <div style="background:#f8fafc; padding:14px; border-radius:28px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                    <div><span style="font-size:1.5rem;">${prod.icon || '📦'}</span> <strong>${prod.name}</strong><br><span class="price" style="font-size:1rem;">UGX ${prod.price.toLocaleString()}</span></div>
+                    <div>
+                        <button class="edit-price-btn" data-editid="${prod.id}"><i class="fas fa-pen"></i> Edit price</button>
+                        <button onclick="deleteVendorProduct(${prod.id})" style="background:#e76f51; margin-left:8px;">Delete</button>
+                    </div>
+                </div>
+            `).join("");
+            if(myProducts.length === 0) container.innerHTML = "<p>No products yet. Add your first item.</p>";
+            document.querySelectorAll('.edit-price-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    let prodId = parseInt(btn.dataset.editid);
+                    openEditPriceModal(prodId);
+                });
+            });
+        }
+    }
+    window.deleteVendorProduct = (id) => {
+        allProducts = allProducts.filter(p => p.id !== id);
+        syncStorage();
+        loadVendorProducts();
+        renderMarketplace();
+        showToast("Product removed");
+    };
+    function openEditPriceModal(productId) {
+        const product = allProducts.find(p => p.id === productId);
+        if(product && product.vendorPhone === currentVendorPhone) {
+            currentEditProductId = productId;
+            document.getElementById('editProductNameDisplay').innerHTML = `Product: ${product.name}`;
+            document.getElementById('editPriceInput').value = product.price;
+            document.getElementById('editPriceModal').style.display = 'flex';
+        }
+    }
+    document.getElementById('closeEditModal').onclick = () => document.getElementById('editPriceModal').style.display = 'none';
+    document.getElementById('confirmEditPriceBtn').onclick = () => {
+        if(currentEditProductId === null) return;
+        let newPrice = parseInt(document.getElementById('editPriceInput').value);
+        if(isNaN(newPrice) || newPrice <= 0) { alert("Enter a valid price"); return; }
+        let productIndex = allProducts.findIndex(p => p.id === currentEditProductId);
+        if(productIndex !== -1 && allProducts[productIndex].vendorPhone === currentVendorPhone) {
+            allProducts[productIndex].price = newPrice;
+            syncStorage();
+            renderMarketplace();
+            loadVendorProducts();
+            document.getElementById('editPriceModal').style.display = 'none';
+            showToast("Price updated!");
+        }
+    };
+    document.getElementById('publishProductBtn').onclick = () => {
+        if(!currentVendorPhone) { alert("Login first"); return; }
+        let name = document.getElementById('addProdName').value.trim();
+        let price = parseInt(document.getElementById('addProdPrice').value);
+        let category = document.getElementById('addProdCategory').value;
+        let desc = document.getElementById('addProdDesc').value.trim();
+        let icon = document.getElementById('addProdIcon').value.trim() || "📦";
+        if(!name || isNaN(price) || price <= 0) { alert("Enter product name and price"); return; }
+        const vendorInfo = approvedVendors.find(v => v.phone === currentVendorPhone);
+        const newId = Date.now();
+        allProducts.push({
+            id: newId, name, price, category, description: desc, icon,
+            vendorPhone: currentVendorPhone,
+            vendorName: vendorInfo ? vendorInfo.name : "Vendor"
+        });
+        syncStorage();
+        renderMarketplace();
+        loadVendorProducts();
+        document.getElementById('addProdName').value = "";
+        document.getElementById('addProdPrice').value = "";
+        document.getElementById('addProdDesc').value = "";
+        showToast("Product published! Buyers can now see your contact.");
+    };
+
+    // Admin panel
+    const adminModal = document.getElementById('adminGlobalModal');
+    document.getElementById('adminNavAccess').onclick = () => adminModal.style.display = 'flex';
+    document.getElementById('closeAdminModal').onclick = () => adminModal.style.display = 'none';
+    document.getElementById('adminLoginBtnGlobal').onclick = () => {
+        let pass = document.getElementById('adminPasswordInput').value;
+        if(pass === ADMIN_CODE) {
+            document.getElementById('adminSecureContent').style.display = 'block';
+            loadAdminDashboard();
+        } else alert("Invalid password");
+    };
+    function loadAdminDashboard() {
+        const pendingDiv = document.getElementById('pendingVendorsAdminList');
+        pendingDiv.innerHTML = pendingVendors.map((v, idx) => `
+            <div style="background:#fff4e6; padding:12px; border-radius:24px; margin-bottom:12px;">
+                <i class="fas fa-user-clock"></i> ${v.name} | ${v.phone}<br>
+                <small>💰 Reference: ${v.transactionId}</small><br>
+                <button class="approve-btn" data-approveidx="${idx}">✅ Approve vendor</button>
+            </div>
+        `).join("");
+        document.querySelectorAll('[data-approveidx]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                let idx = parseInt(btn.dataset.approveidx);
+                let vendor = pendingVendors[idx];
+                if(vendor) {
+                    approvedVendors.push({ name: vendor.name, phone: vendor.phone });
+                    pendingVendors.splice(idx,1);
+                    syncStorage();
+                    loadAdminDashboard();
+                    renderMarketplace();
+                    showToast(`✓ ${vendor.name} approved! Their number is now clickable.`);
+                }
+            });
+        });
+        const approvedDiv = document.getElementById('approvedVendorsAdminList');
+        approvedDiv.innerHTML = approvedVendors.map(v => `<div>✅ ${v.name} — ${v.phone}</div>`).join("");
+    }
+
+    document.getElementById('homeBtnNav').onclick = () => { renderMarketplace(); window.scrollTo(0,0); };
+    document.getElementById('globalSearchField').addEventListener('input', renderMarketplace);
+    window.onclick = (e) => { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; };
+
+    renderMarketplace();
+    updateCartUI();
+</script>
+</body>
+</html>
