@@ -11,7 +11,6 @@
         body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f8fafc 0%, #eef2f5 100%); color: #0f172a; line-height: 1.5; min-height: 100vh; }
         @keyframes aurora { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         @keyframes floatIcon { 0% { transform: translateY(0px); } 100% { transform: translateY(-6px); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
         
         .navbar { background: rgba(10, 35, 28, 0.96); backdrop-filter: blur(16px); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255, 180, 100, 0.3); position: sticky; top: 0; z-index: 200; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
         .brand { display: flex; align-items: center; gap: 14px; }
@@ -33,7 +32,8 @@
         .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.8rem; }
         .product-card { background: white; border-radius: 28px; overflow: hidden; transition: all 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.05); border: 1px solid #eef2f6; }
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 35px rgba(0,0,0,0.1); border-color: #FFB347; }
-        .product-img { background: linear-gradient(145deg, #faf6f0, #fff5ea); height: 180px; display: flex; align-items: center; justify-content: center; font-size: 4.5rem; }
+        .product-img { background: linear-gradient(145deg, #faf6f0, #fff5ea); height: 200px; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; background-repeat: no-repeat; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; }
         .product-info { padding: 1.2rem; }
         .product-title { font-weight: 800; font-size: 1.1rem; color: #1a3a32; }
         .vendor-section { display: flex; justify-content: space-between; align-items: center; margin: 10px 0; flex-wrap: wrap; gap: 8px; }
@@ -45,7 +45,7 @@
         .add-cart { background: #1a3a32; width: 100%; border: none; padding: 10px; border-radius: 48px; color: white; font-weight: 700; margin-top: 10px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .add-cart:hover { background: #FFB347; color: #1e2a2a; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-card { background: white; border-radius: 36px; padding: 1.8rem; max-width: 520px; width: 90%; max-height: 85vh; overflow-y: auto; }
+        .modal-card { background: white; border-radius: 36px; padding: 1.8rem; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; }
         .modal-card h3 { font-size: 1.5rem; margin-bottom: 1rem; font-weight: 800; color: #1a3a32; }
         input, select, textarea { width: 100%; padding: 12px 16px; margin: 8px 0; border-radius: 60px; border: 1.5px solid #e2e8f0; font-size: 0.95rem; transition: 0.2s; background: white; }
         input:focus, select:focus { outline: none; border-color: #FFB347; box-shadow: 0 0 0 3px rgba(255, 160, 70, 0.2); }
@@ -62,6 +62,10 @@
         .btn-mtn:hover, .btn-airtel:hover { transform: translateY(-2px); filter: brightness(1.05); }
         .payment-info { background: #f0fdf4; border-radius: 24px; padding: 1rem; text-align: center; border: 1px solid #bbf7d0; margin: 1rem 0; }
         .payment-info .number { font-size: 1.5rem; font-weight: 800; letter-spacing: 2px; background: #1a3a32; color: white; padding: 8px; border-radius: 40px; display: inline-block; margin: 8px 0; }
+        .image-upload-area { border: 2px dashed #cbd5e1; border-radius: 24px; padding: 1rem; text-align: center; margin: 10px 0; cursor: pointer; transition: 0.2s; }
+        .image-upload-area:hover { border-color: #FFB347; background: #fef3e8; }
+        .image-preview { width: 100%; height: 150px; object-fit: cover; border-radius: 20px; margin-top: 10px; display: none; }
+        .product-image-preview { width: 60px; height: 60px; object-fit: cover; border-radius: 12px; margin-right: 10px; }
         footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 1.8rem; margin-top: 2.5rem; font-size: 0.8rem; }
         .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1a3a32; color: white; padding: 10px 24px; border-radius: 60px; z-index: 1200; font-weight: 600; box-shadow: 0 8px 18px rgba(0,0,0,0.2); font-size: 0.85rem; }
         @media (max-width: 680px) { .navbar { flex-direction: column; text-align: center; padding: 1rem; } .nav-actions { justify-content: center; } .hero h2 { font-size: 1.4rem; } }
@@ -85,7 +89,7 @@
 
 <section class="hero">
     <h2><i class="fas fa-gem"></i> CreedMarket — Connect with Local Vendors</h2>
-    <p style="margin-top: 6px;">Verified sellers • Quality products • Secure transactions</p>
+    <p style="margin-top: 6px;">Verified sellers • Quality products • Real product photos</p>
     <input type="text" id="globalSearchField" class="search-bar" placeholder="🔍 Search products, vendors or categories...">
 </section>
 
@@ -99,7 +103,7 @@
 <!-- Cart Modal -->
 <div id="cartModalGlobal" class="modal"><div class="modal-card"><span id="closeCartModal" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span><h3><i class="fas fa-bag-shopping"></i> Your Cart</h3><div id="cartItemsContainer"></div><div id="cartTotalAmount" style="font-weight:bold; margin:1rem 0;"></div><button id="realCheckoutBtn">Confirm Order</button><div id="orderStatusMsg"></div></div></div>
 
-<!-- Seller Registration - Direct Mobile Money Integration -->
+<!-- Seller Registration -->
 <div id="registerSellerModal" class="modal">
     <div class="modal-card">
         <span id="closeRegModalBtn" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span>
@@ -136,8 +140,43 @@
     </div>
 </div>
 
-<!-- Vendor Dashboard -->
-<div id="vendorDashboardModal" class="modal"><div class="modal-card"><span id="closeVendorDash" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span><h3><i class="fas fa-chart-line"></i> Vendor Dashboard</h3><div id="vendorLoginSection"><input type="tel" id="vendorPhoneLoginInput" placeholder="Phone number"><button id="vendorLoginAction">Access Dashboard</button></div><div id="vendorInnerPanel" style="display:none;"><h4>Add New Product</h4><input type="text" id="addProdName" placeholder="Product name"><input type="number" id="addProdPrice" placeholder="Price (UGX)"><select id="addProdCategory"><option>Fresh Foods</option><option>Electronics</option><option>Fashion</option><option>Home & Living</option></select><input type="text" id="addProdDesc" placeholder="Description"><input type="text" id="addProdIcon" placeholder="Emoji" value="📦"><button id="publishProductBtn">Publish Product</button><hr><h4>Your Listings</h4><div id="vendorProductsList"></div></div></div></div>
+<!-- Vendor Dashboard with Image Upload -->
+<div id="vendorDashboardModal" class="modal">
+    <div class="modal-card">
+        <span id="closeVendorDash" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span>
+        <h3><i class="fas fa-chart-line"></i> Vendor Dashboard</h3>
+        <div id="vendorLoginSection">
+            <input type="tel" id="vendorPhoneLoginInput" placeholder="Phone number">
+            <button id="vendorLoginAction">Access Dashboard</button>
+        </div>
+        <div id="vendorInnerPanel" style="display:none;">
+            <h4>Add New Product</h4>
+            <input type="text" id="addProdName" placeholder="Product name">
+            <input type="number" id="addProdPrice" placeholder="Price (UGX)">
+            <select id="addProdCategory">
+                <option>Fresh Foods</option>
+                <option>Electronics</option>
+                <option>Fashion</option>
+                <option>Home & Living</option>
+            </select>
+            <input type="text" id="addProdDesc" placeholder="Description">
+            
+            <!-- Image Upload from Gallery -->
+            <div class="image-upload-area" id="imageUploadArea">
+                <i class="fas fa-camera" style="font-size: 2rem; color: #FFB347;"></i>
+                <p>Tap to select product image from gallery</p>
+                <small style="color: #64748b;">Upload a photo of your product</small>
+                <input type="file" id="productImageInput" accept="image/*" capture="environment" style="display: none;">
+                <img id="imagePreview" class="image-preview" alt="Product preview">
+            </div>
+            
+            <button id="publishProductBtn">Publish Product</button>
+            <hr style="margin: 1rem 0;">
+            <h4>Your Listings</h4>
+            <div id="vendorProductsList"></div>
+        </div>
+    </div>
+</div>
 
 <!-- Admin Panel -->
 <div id="adminGlobalModal" class="modal"><div class="modal-card"><span id="closeAdminModal" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span><h3><i class="fas fa-user-shield"></i> Admin Console</h3><input type="password" id="adminPasswordInput" placeholder="Admin password"><button id="adminLoginBtnGlobal">Login</button><div id="adminSecureContent" style="display:none; margin-top: 1.5rem;"><h4>Pending Vendor Requests</h4><div id="pendingVendorsAdminList"></div><h4 style="margin-top: 1rem;">Approved Vendors</h4><div id="approvedVendorsAdminList"></div></div></div></div>
@@ -154,6 +193,7 @@
     const ADMIN_CODE = "creed123";
     const PAYMENT_NUMBER = "0709298041";
     let currentEditProductId = null;
+    let currentImageData = null;
 
     function syncStorage() {
         localStorage.setItem('CreedMarket_approvedVendors', JSON.stringify(approvedVendors));
@@ -175,19 +215,16 @@
         document.getElementById('cartCountNumber').innerText = total;
     }
 
-    // Direct mobile money payment links
     function openMobileMoney(provider) {
         let phoneNumber = PAYMENT_NUMBER;
         let amount = "5000";
         
         if (provider === 'mtn') {
-            // MTN MoMo deep link - opens MTN app or USSD
             window.location.href = `tel:*165*${phoneNumber}*${amount}#`;
             setTimeout(() => {
                 window.location.href = `https://pay.airtel.ug/mobilemoney?phone=${phoneNumber}&amount=${amount}`;
             }, 500);
         } else if (provider === 'airtel') {
-            // Airtel Money deep link
             window.location.href = `tel:*185*${phoneNumber}*${amount}#`;
             setTimeout(() => {
                 window.location.href = `https://www.airtel.ug/airtel-money`;
@@ -196,7 +233,6 @@
         showToast(`Opening ${provider === 'mtn' ? 'MTN MoMo' : 'Airtel Money'}... Complete payment of 5,000 UGX`);
     }
 
-    // Phone validation
     function validatePhone(phone) {
         let digitsOnly = phone.replace(/\D/g, '');
         if (digitsOnly.length === 0) return { valid: false, message: "Phone number is required" };
@@ -242,6 +278,35 @@
         }
     });
 
+    // Image upload handling
+    const imageInput = document.getElementById('productImageInput');
+    const imageUploadArea = document.getElementById('imageUploadArea');
+    const imagePreview = document.getElementById('imagePreview');
+
+    if (imageUploadArea) {
+        imageUploadArea.addEventListener('click', () => {
+            imageInput.click();
+        });
+    }
+
+    if (imageInput) {
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    currentImageData = event.target.result;
+                    imagePreview.src = currentImageData;
+                    imagePreview.style.display = 'block';
+                    imageUploadArea.querySelector('p').style.display = 'none';
+                    imageUploadArea.querySelector('small').style.display = 'none';
+                    imageUploadArea.querySelector('i').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
     function getContactButtons(phone) {
         let cleanPhone = phone.replace(/\s+/g, '');
         if (cleanPhone.startsWith('0')) cleanPhone = '256' + cleanPhone.substring(1);
@@ -262,7 +327,9 @@
         if(filtered.length === 0) { container.innerHTML = `<div class="empty-marketplace"><i class="fas fa-search"></i><p>No matching products found.</p></div>`; return; }
         let gridHtml = `<div class="products-grid">`;
         filtered.forEach(prod => {
-            gridHtml += `<div class="product-card"><div class="product-img">${prod.icon || '📦'}</div><div class="product-info"><div class="product-title">${escapeHtml(prod.name)}</div><div class="vendor-section"><span class="vendor-name"><i class="fas fa-store"></i> ${escapeHtml(prod.vendorName)}</span>${prod.vendorPhone ? getContactButtons(prod.vendorPhone) : ''}</div><div class="price">UGX ${prod.price.toLocaleString()}</div><div class="description" style="font-size:0.8rem; color:#64748b;">${escapeHtml(prod.description)}</div><button class="add-to-cart-item" data-id="${prod.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button></div></div>`;
+            let imageStyle = prod.imageData ? `background-image: url('${prod.imageData}'); background-size: cover;` : '';
+            let imageHtml = prod.imageData ? `<div class="product-img" style="${imageStyle}"></div>` : `<div class="product-img">${prod.icon || '📦'}</div>`;
+            gridHtml += `<div class="product-card">${imageHtml}<div class="product-info"><div class="product-title">${escapeHtml(prod.name)}</div><div class="vendor-section"><span class="vendor-name"><i class="fas fa-store"></i> ${escapeHtml(prod.vendorName)}</span>${prod.vendorPhone ? getContactButtons(prod.vendorPhone) : ''}</div><div class="price">UGX ${prod.price.toLocaleString()}</div><div class="description" style="font-size:0.8rem; color:#64748b;">${escapeHtml(prod.description)}</div><button class="add-to-cart-item" data-id="${prod.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button></div></div>`;
         });
         gridHtml += `</div>`;
         container.innerHTML = gridHtml;
@@ -280,12 +347,11 @@
     window.removeCartItem = (idx) => { shoppingCart.splice(idx,1); syncStorage(); updateCartUI(); openCartModal(); renderMarketplace(); };
     document.getElementById('realCheckoutBtn').onclick = () => { if(shoppingCart.length === 0) alert("Cart is empty"); else { document.getElementById('orderStatusMsg').innerHTML = "<div style='background:#d1fae5; padding:12px; border-radius:28px;'>✓ Order placed! Vendors will be notified.</div>"; shoppingCart = []; syncStorage(); updateCartUI(); setTimeout(() => cartModal.style.display = 'none', 1800); renderMarketplace(); } };
 
-    // Registration with direct payment
+    // Registration
     const regModal = document.getElementById('registerSellerModal');
     document.getElementById('sellerApplyNav').onclick = () => regModal.style.display = 'flex';
     document.getElementById('closeRegModalBtn').onclick = () => regModal.style.display = 'none';
     
-    // Payment buttons
     document.getElementById('payWithMTN').onclick = () => openMobileMoney('mtn');
     document.getElementById('payWithAirtel').onclick = () => openMobileMoney('airtel');
     
@@ -330,12 +396,56 @@
             else alert("No account found. Pay 5,000 UGX and register first.");
         }
     };
-    function loadVendorProducts() { let myProducts = allProducts.filter(p => p.vendorPhone === currentVendorPhone); let container = document.getElementById('vendorProductsList'); if(container) { container.innerHTML = myProducts.map(prod => `<div style="background:#f8fafc; padding:12px; border-radius:24px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;"><div><span style="font-size:1.3rem;">${prod.icon || '📦'}</span> <strong>${prod.name}</strong><br><span style="font-weight:700;">UGX ${prod.price.toLocaleString()}</span></div><div><button class="edit-price-btn" data-editid="${prod.id}">✎ Price</button><button onclick="deleteVendorProduct(${prod.id})" style="background:#e74c3c; margin-left:8px;">Delete</button></div></div>`).join(""); if(myProducts.length === 0) container.innerHTML = "<p style='color:#64748b;'>No products yet. Add your first product above.</p>"; document.querySelectorAll('.edit-price-btn').forEach(btn => btn.addEventListener('click', (e) => openEditPriceModal(parseInt(btn.dataset.editid)))); } }
+    function loadVendorProducts() { let myProducts = allProducts.filter(p => p.vendorPhone === currentVendorPhone); let container = document.getElementById('vendorProductsList'); if(container) { container.innerHTML = myProducts.map(prod => `<div style="background:#f8fafc; padding:12px; border-radius:24px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;"><div style="display:flex; align-items:center;"><img src="${prod.imageData || 'https://via.placeholder.com/50'}" style="width:50px; height:50px; object-fit:cover; border-radius:12px; margin-right:12px;"><div><strong>${prod.name}</strong><br><span style="font-weight:700;">UGX ${prod.price.toLocaleString()}</span></div></div><div><button class="edit-price-btn" data-editid="${prod.id}">✎ Price</button><button onclick="deleteVendorProduct(${prod.id})" style="background:#e74c3c; margin-left:8px;">Delete</button></div></div>`).join(""); if(myProducts.length === 0) container.innerHTML = "<p style='color:#64748b;'>No products yet. Add your first product above.</p>"; document.querySelectorAll('.edit-price-btn').forEach(btn => btn.addEventListener('click', (e) => openEditPriceModal(parseInt(btn.dataset.editid)))); } }
     window.deleteVendorProduct = (id) => { allProducts = allProducts.filter(p => p.id !== id); syncStorage(); loadVendorProducts(); renderMarketplace(); showToast("Product removed"); };
     function openEditPriceModal(productId) { const product = allProducts.find(p => p.id === productId); if(product && product.vendorPhone === currentVendorPhone) { currentEditProductId = productId; document.getElementById('editProductNameDisplay').innerHTML = `Product: ${product.name}`; document.getElementById('editPriceInput').value = product.price; document.getElementById('editPriceModal').style.display = 'flex'; } }
     document.getElementById('closeEditModal').onclick = () => document.getElementById('editPriceModal').style.display = 'none';
     document.getElementById('confirmEditPriceBtn').onclick = () => { if(currentEditProductId) { let newPrice = parseInt(document.getElementById('editPriceInput').value); if(isNaN(newPrice) || newPrice <= 0) alert("Enter a valid price"); else { let idx = allProducts.findIndex(p => p.id === currentEditProductId); if(idx !== -1 && allProducts[idx].vendorPhone === currentVendorPhone) { allProducts[idx].price = newPrice; syncStorage(); renderMarketplace(); loadVendorProducts(); document.getElementById('editPriceModal').style.display = 'none'; showToast("Price updated"); } } } };
-    document.getElementById('publishProductBtn').onclick = () => { if(!currentVendorPhone) alert("Login first"); else { let name = document.getElementById('addProdName').value.trim(); let price = parseInt(document.getElementById('addProdPrice').value); let category = document.getElementById('addProdCategory').value; let desc = document.getElementById('addProdDesc').value.trim(); let icon = document.getElementById('addProdIcon').value.trim() || "📦"; if(!name || isNaN(price) || price <= 0) alert("Valid product name and price required"); else { let vendorInfo = approvedVendors.find(v => v.phone === currentVendorPhone); allProducts.push({ id: Date.now(), name, price, category, description: desc, icon, vendorPhone: currentVendorPhone, vendorName: vendorInfo ? vendorInfo.name : "Merchant" }); syncStorage(); renderMarketplace(); loadVendorProducts(); document.getElementById('addProdName').value = ""; document.getElementById('addProdPrice').value = ""; document.getElementById('addProdDesc').value = ""; showToast("Product published!"); } } };
+    document.getElementById('publishProductBtn').onclick = () => { 
+        if(!currentVendorPhone) alert("Login first"); 
+        else { 
+            let name = document.getElementById('addProdName').value.trim(); 
+            let price = parseInt(document.getElementById('addProdPrice').value); 
+            let category = document.getElementById('addProdCategory').value; 
+            let desc = document.getElementById('addProdDesc').value.trim(); 
+            let icon = document.getElementById('addProdIcon')?.value.trim() || "📦";
+            let imageData = currentImageData;
+            
+            if(!name || isNaN(price) || price <= 0) alert("Valid product name and price required"); 
+            else { 
+                let vendorInfo = approvedVendors.find(v => v.phone === currentVendorPhone); 
+                allProducts.push({ 
+                    id: Date.now(), 
+                    name, 
+                    price, 
+                    category, 
+                    description: desc, 
+                    icon: imageData ? null : icon,
+                    imageData: imageData || null,
+                    vendorPhone: currentVendorPhone, 
+                    vendorName: vendorInfo ? vendorInfo.name : "Merchant" 
+                }); 
+                syncStorage(); 
+                renderMarketplace(); 
+                loadVendorProducts(); 
+                document.getElementById('addProdName').value = ""; 
+                document.getElementById('addProdPrice').value = ""; 
+                document.getElementById('addProdDesc').value = ""; 
+                currentImageData = null;
+                if(imagePreview) {
+                    imagePreview.style.display = 'none';
+                    imagePreview.src = '';
+                    const uploadArea = document.getElementById('imageUploadArea');
+                    if(uploadArea) {
+                        uploadArea.querySelector('p').style.display = 'block';
+                        uploadArea.querySelector('small').style.display = 'block';
+                        uploadArea.querySelector('i').style.display = 'block';
+                    }
+                }
+                showToast("Product published with image!"); 
+            } 
+        } 
+    };
 
     // Admin Panel
     const adminModal = document.getElementById('adminGlobalModal');
@@ -360,4 +470,4 @@
     updateCartUI();
 </script>
 </body>
-    </html>            
+    </html>
