@@ -3,71 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>CreedMarket | AI-Powered Uganda Marketplace</title>
+    <title>CreedMarket | Uganda Marketplace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at 10% 20%, #f8fafc 0%, #eef2f5 100%); color: #0f172a; line-height: 1.5; min-height: 100vh; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f8fafc 0%, #eef2f5 100%); color: #0f172a; line-height: 1.5; min-height: 100vh; }
         @keyframes aurora { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         @keyframes floatIcon { 0% { transform: translateY(0px); } 100% { transform: translateY(-6px); } }
-        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
         
-        .navbar { background: rgba(10, 35, 28, 0.95); backdrop-filter: blur(16px); padding: 1rem 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255, 180, 100, 0.3); position: sticky; top: 0; z-index: 200; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+        .navbar { background: rgba(10, 35, 28, 0.96); backdrop-filter: blur(16px); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255, 180, 100, 0.3); position: sticky; top: 0; z-index: 200; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
         .brand { display: flex; align-items: center; gap: 14px; }
-        .logo-icon { background: linear-gradient(125deg, #FFB347, #FF6B6B, #4ECDC4); background-size: 200% 200%; animation: aurora 4s ease infinite; width: 54px; height: 54px; border-radius: 32px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; box-shadow: 0 8px 18px rgba(0,0,0,0.2); }
-        .brand-text h1 { font-size: 1.9rem; background: linear-gradient(135deg, #FFFFFF, #FFD89B); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; }
+        .logo-icon { background: linear-gradient(125deg, #FFB347, #FF6B6B, #4ECDC4); background-size: 200% 200%; animation: aurora 4s ease infinite; width: 52px; height: 52px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; box-shadow: 0 8px 18px rgba(0,0,0,0.2); }
+        .brand-text h1 { font-size: 1.8rem; background: linear-gradient(135deg, #FFFFFF, #FFD89B); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; }
         .brand-text p { font-size: 0.7rem; color: #FFD89B; }
-        .nav-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-        .nav-btn { background: rgba(255,255,245,0.1); border: 1px solid rgba(255,200,130,0.3); padding: 8px 22px; border-radius: 44px; color: white; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
-        .nav-btn:hover { background: linear-gradient(95deg, #FFB347, #FF6B6B); color: #1e2a2a; transform: translateY(-3px); }
-        .cart-badge { background: linear-gradient(125deg, #FFB347, #FF8C42); padding: 8px 22px; border-radius: 44px; display: flex; align-items: center; gap: 10px; font-weight: 800; cursor: pointer; color: white; transition: 0.2s; }
+        .nav-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .nav-btn { background: rgba(255,255,245,0.1); border: 1px solid rgba(255,200,130,0.3); padding: 8px 20px; border-radius: 44px; color: white; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+        .nav-btn:hover { background: linear-gradient(95deg, #FFB347, #FF6B6B); color: #1e2a2a; transform: translateY(-2px); }
+        .cart-badge { background: linear-gradient(125deg, #FFB347, #FF8C42); padding: 8px 20px; border-radius: 44px; display: flex; align-items: center; gap: 8px; font-weight: 800; cursor: pointer; color: white; transition: 0.2s; }
         .cart-badge:hover { transform: scale(1.02); }
-        .hero { background: linear-gradient(108deg, #f0f7f4, #e8f0eb); padding: 2.2rem 2rem; text-align: center; }
-        .hero h2 { font-size: 2rem; background: linear-gradient(125deg, #1F3B34, #E67E22); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; }
-        .search-bar { max-width: 640px; width: 90%; margin: 1.5rem auto 0; padding: 14px 28px; border-radius: 80px; border: none; background: white; box-shadow: 0 8px 20px rgba(0,0,0,0.08); font-size: 1rem; transition: 0.2s; }
+        .hero { background: linear-gradient(108deg, #f0f7f4, #e8f0eb); padding: 2rem 1.5rem; text-align: center; }
+        .hero h2 { font-size: 1.8rem; background: linear-gradient(125deg, #1F3B34, #E67E22); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; }
+        .search-bar { max-width: 600px; width: 90%; margin: 1.2rem auto 0; padding: 14px 24px; border-radius: 80px; border: none; background: white; box-shadow: 0 8px 20px rgba(0,0,0,0.08); font-size: 1rem; }
         .search-bar:focus { outline: none; box-shadow: 0 0 0 4px rgba(255, 160, 70, 0.3); }
-        .container { max-width: 1400px; margin: 2.5rem auto; padding: 0 2rem; }
-        .empty-marketplace { background: white; border-radius: 48px; padding: 3rem; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-        .empty-marketplace i { font-size: 4.5rem; background: linear-gradient(125deg, #FFB347, #FF6B6B); -webkit-background-clip: text; background-clip: text; color: transparent; animation: floatIcon 2s infinite alternate; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
-        .product-card { background: white; border-radius: 32px; overflow: hidden; transition: all 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.05); border: 1px solid #eef2f6; }
-        .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 35px rgba(0,0,0,0.1); border-color: #FFB347; }
-        .product-img { background: linear-gradient(145deg, #faf6f0, #fff5ea); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 4.8rem; }
-        .product-info { padding: 1.3rem; }
-        .product-title { font-weight: 800; font-size: 1.2rem; color: #1a3a32; }
-        .vendor-section { display: flex; justify-content: space-between; align-items: center; margin: 12px 0; flex-wrap: wrap; gap: 10px; }
-        .vendor-name { background: #fef3e8; padding: 5px 14px; border-radius: 40px; font-size: 0.75rem; font-weight: 700; color: #C25D00; display: inline-flex; align-items: center; gap: 8px; }
-        .contact-icons { display: flex; gap: 12px; }
-        .contact-icons a { background: #f1f5f9; width: 36px; height: 36px; border-radius: 30px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: #2C5F4E; transition: 0.2s; }
-        .contact-icons a:hover { background: linear-gradient(135deg, #FFB347, #FF6B6B); color: white; transform: scale(1.1); }
-        .price { font-size: 1.5rem; font-weight: 800; color: #1a5e4a; margin: 8px 0; }
-        .add-cart { background: #1a3a32; width: 100%; border: none; padding: 12px; border-radius: 48px; color: white; font-weight: 700; margin-top: 12px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .container { max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem; }
+        .empty-marketplace { background: white; border-radius: 48px; padding: 2.5rem; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .empty-marketplace i { font-size: 4rem; background: linear-gradient(125deg, #FFB347, #FF6B6B); -webkit-background-clip: text; background-clip: text; color: transparent; animation: floatIcon 2s infinite alternate; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.8rem; }
+        .product-card { background: white; border-radius: 28px; overflow: hidden; transition: all 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.05); border: 1px solid #eef2f6; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 35px rgba(0,0,0,0.1); border-color: #FFB347; }
+        .product-img { background: linear-gradient(145deg, #faf6f0, #fff5ea); height: 180px; display: flex; align-items: center; justify-content: center; font-size: 4.5rem; }
+        .product-info { padding: 1.2rem; }
+        .product-title { font-weight: 800; font-size: 1.1rem; color: #1a3a32; }
+        .vendor-section { display: flex; justify-content: space-between; align-items: center; margin: 10px 0; flex-wrap: wrap; gap: 8px; }
+        .vendor-name { background: #fef3e8; padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; font-weight: 700; color: #C25D00; display: inline-flex; align-items: center; gap: 6px; }
+        .contact-icons { display: flex; gap: 10px; }
+        .contact-icons a { background: #f1f5f9; width: 34px; height: 34px; border-radius: 28px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: #2C5F4E; transition: 0.2s; }
+        .contact-icons a:hover { background: linear-gradient(135deg, #FFB347, #FF6B6B); color: white; transform: scale(1.08); }
+        .price { font-size: 1.4rem; font-weight: 800; color: #1a5e4a; margin: 8px 0; }
+        .add-cart { background: #1a3a32; width: 100%; border: none; padding: 10px; border-radius: 48px; color: white; font-weight: 700; margin-top: 10px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .add-cart:hover { background: #FFB347; color: #1e2a2a; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-card { background: white; border-radius: 40px; padding: 2rem; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; }
-        .modal-card h3 { font-size: 1.6rem; margin-bottom: 1rem; font-weight: 800; color: #1a3a32; }
-        input, select, textarea { width: 100%; padding: 14px 18px; margin: 10px 0; border-radius: 60px; border: 1.5px solid #e2e8f0; font-size: 0.95rem; transition: 0.2s; background: white; }
+        .modal-card { background: white; border-radius: 36px; padding: 1.8rem; max-width: 520px; width: 90%; max-height: 85vh; overflow-y: auto; }
+        .modal-card h3 { font-size: 1.5rem; margin-bottom: 1rem; font-weight: 800; color: #1a3a32; }
+        input, select, textarea { width: 100%; padding: 12px 16px; margin: 8px 0; border-radius: 60px; border: 1.5px solid #e2e8f0; font-size: 0.95rem; transition: 0.2s; background: white; }
         input:focus, select:focus { outline: none; border-color: #FFB347; box-shadow: 0 0 0 3px rgba(255, 160, 70, 0.2); }
         input.error { border-color: #e74c3c; background: #fff5f5; }
-        .error-message { color: #e74c3c; font-size: 0.75rem; margin-top: -5px; margin-bottom: 8px; display: block; }
-        button { background: #1a3a32; color: white; border: none; padding: 12px 24px; border-radius: 60px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.95rem; }
+        .error-message { color: #e74c3c; font-size: 0.7rem; margin-top: -5px; margin-bottom: 6px; display: block; }
+        button { background: #1a3a32; color: white; border: none; padding: 12px 22px; border-radius: 60px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.9rem; width: 100%; }
         button:hover { transform: translateY(-2px); }
         .approve-btn { background: linear-gradient(95deg, #FFB347, #FF8C42); color: #1e2a2a; }
-        .status-pending { background: #fef3c7; color: #d97706; padding: 4px 12px; border-radius: 30px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
-        .status-approved { background: #d1fae5; color: #059669; padding: 4px 12px; border-radius: 30px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
-        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 2rem; margin-top: 3rem; }
-        .toast { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: #1a3a32; color: white; padding: 12px 28px; border-radius: 60px; z-index: 1200; font-weight: 600; box-shadow: 0 8px 18px rgba(0,0,0,0.2); }
-        .badge-ai { background: linear-gradient(95deg, #667eea, #764ba2); color: white; font-size: 0.6rem; padding: 2px 8px; border-radius: 20px; margin-left: 8px; }
-        @media (max-width: 680px) { .navbar { flex-direction: column; text-align: center; padding: 1rem; } .nav-actions { justify-content: center; } }
+        .status-pending { background: #fef3c7; color: #d97706; padding: 4px 10px; border-radius: 30px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
+        .status-approved { background: #d1fae5; color: #059669; padding: 4px 10px; border-radius: 30px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
+        .payment-buttons { display: flex; gap: 12px; margin: 15px 0; flex-direction: column; }
+        .btn-mtn { background: #FFC107; color: #1a1a2e; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; font-size: 1rem; }
+        .btn-airtel { background: #E60000; color: white; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; font-size: 1rem; }
+        .btn-mtn:hover, .btn-airtel:hover { transform: translateY(-2px); filter: brightness(1.05); }
+        .payment-info { background: #f0fdf4; border-radius: 24px; padding: 1rem; text-align: center; border: 1px solid #bbf7d0; margin: 1rem 0; }
+        .payment-info .number { font-size: 1.5rem; font-weight: 800; letter-spacing: 2px; background: #1a3a32; color: white; padding: 8px; border-radius: 40px; display: inline-block; margin: 8px 0; }
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 1.8rem; margin-top: 2.5rem; font-size: 0.8rem; }
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1a3a32; color: white; padding: 10px 24px; border-radius: 60px; z-index: 1200; font-weight: 600; box-shadow: 0 8px 18px rgba(0,0,0,0.2); font-size: 0.85rem; }
+        @media (max-width: 680px) { .navbar { flex-direction: column; text-align: center; padding: 1rem; } .nav-actions { justify-content: center; } .hero h2 { font-size: 1.4rem; } }
     </style>
 </head>
 <body>
 
 <nav class="navbar">
     <div class="brand">
-        <div class="logo-icon"><i class="fas fa-brain"></i></div>
-        <div class="brand-text"><h1>CreedMarket <span class="badge-ai">AI-Powered</span></h1><p>Smart • Secure • Uganda</p></div>
+        <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="brand-text"><h1>CreedMarket</h1><p>Uganda's Trusted Marketplace</p></div>
     </div>
     <div class="nav-actions">
         <button class="nav-btn" id="homeBtnNav"><i class="fas fa-home"></i> Explore</button>
@@ -79,41 +84,51 @@
 </nav>
 
 <section class="hero">
-    <h2><i class="fas fa-gem"></i> CreedMarket — AI-Assisted Smart Marketplace</h2>
-    <p style="margin-top: 6px;">Verified vendors • Real-time validation • Secure payments</p>
-    <input type="text" id="globalSearchField" class="search-bar" placeholder="🔍 AI Search: products, vendors, categories...">
+    <h2><i class="fas fa-gem"></i> CreedMarket — Connect with Local Vendors</h2>
+    <p style="margin-top: 6px;">Verified sellers • Quality products • Secure transactions</p>
+    <input type="text" id="globalSearchField" class="search-bar" placeholder="🔍 Search products, vendors or categories...">
 </section>
 
 <div class="container"><div id="marketplaceRoot"></div></div>
 
 <footer>
-    <p><i class="fas fa-shield-alt"></i> Vendor registration: <strong>0709298041</strong> — Pay 5,000 UGX then wait for admin approval</p>
-    <p>© 2025 CreedMarket | AI-Powered Verification System</p>
+    <p><i class="fas fa-shield-alt"></i> Vendor registration: Pay 5,000 UGX to become a verified seller</p>
+    <p>© 2025 CreedMarket | All rights reserved</p>
 </footer>
 
 <!-- Cart Modal -->
 <div id="cartModalGlobal" class="modal"><div class="modal-card"><span id="closeCartModal" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span><h3><i class="fas fa-bag-shopping"></i> Your Cart</h3><div id="cartItemsContainer"></div><div id="cartTotalAmount" style="font-weight:bold; margin:1rem 0;"></div><button id="realCheckoutBtn">Confirm Order</button><div id="orderStatusMsg"></div></div></div>
 
-<!-- Seller Registration - AI-Powered Validation -->
+<!-- Seller Registration - Direct Mobile Money Integration -->
 <div id="registerSellerModal" class="modal">
     <div class="modal-card">
         <span id="closeRegModalBtn" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span>
-        <h3><i class="fas fa-shield-alt"></i> Vendor Registration</h3>
-        <div style="background:#f0fdf4; border-radius: 28px; padding: 1rem; margin: 1rem 0; text-align:center; border: 1px solid #bbf7d0;">
+        <h3><i class="fas fa-store"></i> Vendor Registration</h3>
+        
+        <div class="payment-info">
             <i class="fas fa-mobile-alt fa-2x" style="color:#E67E22;"></i>
-            <p><strong>Step 1:</strong> Send <span style="font-size:1.4rem; font-weight:800;">5,000 UGX</span> to:</p>
-            <span style="font-size:1.6rem; font-weight:800;">0709298041</span><br>
+            <p><strong>Registration Fee:</strong> <span style="font-size:1.5rem; font-weight:800;">5,000 UGX</span></p>
+            <p>Pay to:</p>
+            <div class="number">0709298041</div>
             <small>MTN MoMo / Airtel Money</small>
         </div>
-        <p><strong>Step 2:</strong> Complete the form below. Your request will be reviewed by admin.</p>
         
+        <p style="margin-bottom: 10px;"><strong>Click below to pay directly:</strong></p>
+        <div class="payment-buttons">
+            <button id="payWithMTN" class="btn-mtn"><i class="fas fa-circle"></i> Pay with MTN MoMo</button>
+            <button id="payWithAirtel" class="btn-airtel"><i class="fas fa-circle"></i> Pay with Airtel Money</button>
+        </div>
+        
+        <div style="text-align: center; margin: 10px 0; color: #94a3b8;">— OR —</div>
+        
+        <p><strong>After payment, complete registration:</strong></p>
         <input type="text" id="regNameField" placeholder="Business name / Full name">
         <span class="error-message" id="nameError"></span>
         
         <input type="tel" id="regPhoneField" placeholder="Phone number (e.g., 0771234567)" maxlength="13">
         <span class="error-message" id="phoneError"></span>
         
-        <input type="text" id="regTransactionField" placeholder="Transaction reference (from mobile money)">
+        <input type="text" id="regTransactionField" placeholder="Transaction reference from your payment">
         <span class="error-message" id="txnError"></span>
         
         <button id="submitPaymentRequestBtn"><i class="fas fa-paper-plane"></i> Submit Registration</button>
@@ -122,10 +137,10 @@
 </div>
 
 <!-- Vendor Dashboard -->
-<div id="vendorDashboardModal" class="modal"><div class="modal-card"><span id="closeVendorDash" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span><h3><i class="fas fa-chart-line"></i> Vendor Dashboard</h3><div id="vendorLoginSection"><input type="tel" id="vendorPhoneLoginInput" placeholder="Phone number"><button id="vendorLoginAction">Access Dashboard</button></div><div id="vendorInnerPanel" style="display:none;"><h4>Add New Product</h4><input type="text" id="addProdName" placeholder="Product name"><input type="number" id="addProdPrice" placeholder="Price (UGX)"><select id="addProdCategory"><option>Fresh Foods</option><option>Electronics</option><option>Fashion</option><option>Home & Living</option></select><input type="text" id="addProdDesc" placeholder="Description"><input type="text" id="addProdIcon" placeholder="Emoji" value="✨"><button id="publishProductBtn">Publish</button><hr><h4>Your Listings</h4><div id="vendorProductsList"></div></div></div></div>
+<div id="vendorDashboardModal" class="modal"><div class="modal-card"><span id="closeVendorDash" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span><h3><i class="fas fa-chart-line"></i> Vendor Dashboard</h3><div id="vendorLoginSection"><input type="tel" id="vendorPhoneLoginInput" placeholder="Phone number"><button id="vendorLoginAction">Access Dashboard</button></div><div id="vendorInnerPanel" style="display:none;"><h4>Add New Product</h4><input type="text" id="addProdName" placeholder="Product name"><input type="number" id="addProdPrice" placeholder="Price (UGX)"><select id="addProdCategory"><option>Fresh Foods</option><option>Electronics</option><option>Fashion</option><option>Home & Living</option></select><input type="text" id="addProdDesc" placeholder="Description"><input type="text" id="addProdIcon" placeholder="Emoji" value="📦"><button id="publishProductBtn">Publish Product</button><hr><h4>Your Listings</h4><div id="vendorProductsList"></div></div></div></div>
 
-<!-- Admin Panel - Approve Vendors -->
-<div id="adminGlobalModal" class="modal"><div class="modal-card"><span id="closeAdminModal" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span><h3><i class="fas fa-user-shield"></i> Admin Console</h3><input type="password" id="adminPasswordInput" placeholder="Admin password"><button id="adminLoginBtnGlobal">Login</button><div id="adminSecureContent" style="display:none; margin-top: 1.5rem;"><h4>⏳ Pending Vendor Requests</h4><div id="pendingVendorsAdminList"></div><h4 style="margin-top: 1rem;">✅ Approved Vendors</h4><div id="approvedVendorsAdminList"></div></div></div></div>
+<!-- Admin Panel -->
+<div id="adminGlobalModal" class="modal"><div class="modal-card"><span id="closeAdminModal" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span><h3><i class="fas fa-user-shield"></i> Admin Console</h3><input type="password" id="adminPasswordInput" placeholder="Admin password"><button id="adminLoginBtnGlobal">Login</button><div id="adminSecureContent" style="display:none; margin-top: 1.5rem;"><h4>Pending Vendor Requests</h4><div id="pendingVendorsAdminList"></div><h4 style="margin-top: 1rem;">Approved Vendors</h4><div id="approvedVendorsAdminList"></div></div></div></div>
 
 <div id="editPriceModal" class="modal"><div class="modal-card"><span id="closeEditModal" style="float:right; font-size:1.8rem; cursor:pointer;">&times;</span><h3><i class="fas fa-edit"></i> Update Price</h3><p id="editProductNameDisplay"></p><input type="number" id="editPriceInput" placeholder="New price (UGX)"><button id="confirmEditPriceBtn">Save Changes</button></div></div>
 
@@ -137,6 +152,7 @@
     let shoppingCart = JSON.parse(localStorage.getItem('CreedMarket_cart')) || [];
     
     const ADMIN_CODE = "creed123";
+    const PAYMENT_NUMBER = "0709298041";
     let currentEditProductId = null;
 
     function syncStorage() {
@@ -159,7 +175,28 @@
         document.getElementById('cartCountNumber').innerText = total;
     }
 
-    // Phone number validation (digits only, Ugandan format)
+    // Direct mobile money payment links
+    function openMobileMoney(provider) {
+        let phoneNumber = PAYMENT_NUMBER;
+        let amount = "5000";
+        
+        if (provider === 'mtn') {
+            // MTN MoMo deep link - opens MTN app or USSD
+            window.location.href = `tel:*165*${phoneNumber}*${amount}#`;
+            setTimeout(() => {
+                window.location.href = `https://pay.airtel.ug/mobilemoney?phone=${phoneNumber}&amount=${amount}`;
+            }, 500);
+        } else if (provider === 'airtel') {
+            // Airtel Money deep link
+            window.location.href = `tel:*185*${phoneNumber}*${amount}#`;
+            setTimeout(() => {
+                window.location.href = `https://www.airtel.ug/airtel-money`;
+            }, 500);
+        }
+        showToast(`Opening ${provider === 'mtn' ? 'MTN MoMo' : 'Airtel Money'}... Complete payment of 5,000 UGX`);
+    }
+
+    // Phone validation
     function validatePhone(phone) {
         let digitsOnly = phone.replace(/\D/g, '');
         if (digitsOnly.length === 0) return { valid: false, message: "Phone number is required" };
@@ -168,7 +205,7 @@
         return { valid: true, message: "" };
     }
 
-    // AI-style real-time validation on inputs
+    // Real-time validation
     document.getElementById('regPhoneField')?.addEventListener('input', function(e) {
         let digits = this.value.replace(/\D/g, '');
         this.value = digits;
@@ -218,14 +255,14 @@
         const container = document.getElementById('marketplaceRoot');
         if (!container) return;
         if (allProducts.length === 0) {
-            container.innerHTML = `<div class="empty-marketplace"><i class="fas fa-store"></i><h3>✨ Welcome to CreedMarket ✨</h3><p>Uganda's AI-powered marketplace. No products yet.</p><button id="quickApplyBtnEmpty" style="background:#1a3a32; color:white;">Become a Seller</button></div>`;
+            container.innerHTML = `<div class="empty-marketplace"><i class="fas fa-store"></i><h3>Welcome to CreedMarket</h3><p>Discover amazing products from local vendors. Be the first to list your items!</p><button id="quickApplyBtnEmpty" style="background:#1a3a32; color:white; width:auto; padding:12px 30px;">Become a Seller</button></div>`;
             document.getElementById('quickApplyBtnEmpty')?.addEventListener('click', () => document.getElementById('registerSellerModal').style.display = 'flex');
             return;
         }
         if(filtered.length === 0) { container.innerHTML = `<div class="empty-marketplace"><i class="fas fa-search"></i><p>No matching products found.</p></div>`; return; }
         let gridHtml = `<div class="products-grid">`;
         filtered.forEach(prod => {
-            gridHtml += `<div class="product-card"><div class="product-img">${prod.icon || '✨'}</div><div class="product-info"><div class="product-title">${escapeHtml(prod.name)}</div><div class="vendor-section"><span class="vendor-name"><i class="fas fa-store"></i> ${escapeHtml(prod.vendorName)}</span>${prod.vendorPhone ? getContactButtons(prod.vendorPhone) : ''}</div><div class="price">UGX ${prod.price.toLocaleString()}</div><div class="description" style="font-size:0.8rem; color:#64748b;">${escapeHtml(prod.description)}</div><button class="add-to-cart-item" data-id="${prod.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button></div></div>`;
+            gridHtml += `<div class="product-card"><div class="product-img">${prod.icon || '📦'}</div><div class="product-info"><div class="product-title">${escapeHtml(prod.name)}</div><div class="vendor-section"><span class="vendor-name"><i class="fas fa-store"></i> ${escapeHtml(prod.vendorName)}</span>${prod.vendorPhone ? getContactButtons(prod.vendorPhone) : ''}</div><div class="price">UGX ${prod.price.toLocaleString()}</div><div class="description" style="font-size:0.8rem; color:#64748b;">${escapeHtml(prod.description)}</div><button class="add-to-cart-item" data-id="${prod.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button></div></div>`;
         });
         gridHtml += `</div>`;
         container.innerHTML = gridHtml;
@@ -241,12 +278,17 @@
     document.getElementById('closeCartModal').onclick = () => cartModal.style.display = 'none';
     function openCartModal() { let itemsHtml = "", total = 0; shoppingCart.forEach((item, idx) => { let itemSum = item.price * item.quantity; total += itemSum; itemsHtml += `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #e2e8f0; padding:10px 0;"><div><strong>${item.name}</strong> x${item.quantity}</div><div>UGX ${itemSum.toLocaleString()} <button style="background:#e74c3c; padding:4px 12px; margin-left:8px;" onclick="removeCartItem(${idx})">✖</button></div></div>`; }); document.getElementById('cartItemsContainer').innerHTML = itemsHtml || "<p>Your cart is empty</p>"; document.getElementById('cartTotalAmount').innerHTML = `Total: UGX ${total.toLocaleString()}`; cartModal.style.display = 'flex'; }
     window.removeCartItem = (idx) => { shoppingCart.splice(idx,1); syncStorage(); updateCartUI(); openCartModal(); renderMarketplace(); };
-    document.getElementById('realCheckoutBtn').onclick = () => { if(shoppingCart.length === 0) alert("Cart is empty"); else { document.getElementById('orderStatusMsg').innerHTML = "<div style='background:#d1fae5; padding:12px; border-radius:28px;'>✅ Order placed! Vendors will be notified.</div>"; shoppingCart = []; syncStorage(); updateCartUI(); setTimeout(() => cartModal.style.display = 'none', 1800); renderMarketplace(); } };
+    document.getElementById('realCheckoutBtn').onclick = () => { if(shoppingCart.length === 0) alert("Cart is empty"); else { document.getElementById('orderStatusMsg').innerHTML = "<div style='background:#d1fae5; padding:12px; border-radius:28px;'>✓ Order placed! Vendors will be notified.</div>"; shoppingCart = []; syncStorage(); updateCartUI(); setTimeout(() => cartModal.style.display = 'none', 1800); renderMarketplace(); } };
 
-    // Registration with validation
+    // Registration with direct payment
     const regModal = document.getElementById('registerSellerModal');
     document.getElementById('sellerApplyNav').onclick = () => regModal.style.display = 'flex';
     document.getElementById('closeRegModalBtn').onclick = () => regModal.style.display = 'none';
+    
+    // Payment buttons
+    document.getElementById('payWithMTN').onclick = () => openMobileMoney('mtn');
+    document.getElementById('payWithAirtel').onclick = () => openMobileMoney('airtel');
+    
     document.getElementById('submitPaymentRequestBtn').onclick = () => {
         let name = document.getElementById('regNameField').value.trim();
         let phone = document.getElementById('regPhoneField').value.trim();
@@ -285,15 +327,15 @@
         } else {
             let pending = pendingVendors.find(v => v.phone === phone);
             if(pending) alert("Your registration is pending admin approval. Please wait.");
-            else alert("No account found. Pay 5,000 UGX to 0709298041 and register first.");
+            else alert("No account found. Pay 5,000 UGX and register first.");
         }
     };
-    function loadVendorProducts() { let myProducts = allProducts.filter(p => p.vendorPhone === currentVendorPhone); let container = document.getElementById('vendorProductsList'); if(container) { container.innerHTML = myProducts.map(prod => `<div style="background:#f8fafc; padding:14px; border-radius:24px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;"><div><span style="font-size:1.5rem;">${prod.icon || '✨'}</span> <strong>${prod.name}</strong><br><span style="font-weight:700;">UGX ${prod.price.toLocaleString()}</span></div><div><button class="edit-price-btn" data-editid="${prod.id}">✎ Edit Price</button><button onclick="deleteVendorProduct(${prod.id})" style="background:#e74c3c; margin-left:8px;">Delete</button></div></div>`).join(""); if(myProducts.length === 0) container.innerHTML = "<p style='color:#64748b;'>No products yet. Add your first product above.</p>"; document.querySelectorAll('.edit-price-btn').forEach(btn => btn.addEventListener('click', (e) => openEditPriceModal(parseInt(btn.dataset.editid)))); } }
+    function loadVendorProducts() { let myProducts = allProducts.filter(p => p.vendorPhone === currentVendorPhone); let container = document.getElementById('vendorProductsList'); if(container) { container.innerHTML = myProducts.map(prod => `<div style="background:#f8fafc; padding:12px; border-radius:24px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;"><div><span style="font-size:1.3rem;">${prod.icon || '📦'}</span> <strong>${prod.name}</strong><br><span style="font-weight:700;">UGX ${prod.price.toLocaleString()}</span></div><div><button class="edit-price-btn" data-editid="${prod.id}">✎ Price</button><button onclick="deleteVendorProduct(${prod.id})" style="background:#e74c3c; margin-left:8px;">Delete</button></div></div>`).join(""); if(myProducts.length === 0) container.innerHTML = "<p style='color:#64748b;'>No products yet. Add your first product above.</p>"; document.querySelectorAll('.edit-price-btn').forEach(btn => btn.addEventListener('click', (e) => openEditPriceModal(parseInt(btn.dataset.editid)))); } }
     window.deleteVendorProduct = (id) => { allProducts = allProducts.filter(p => p.id !== id); syncStorage(); loadVendorProducts(); renderMarketplace(); showToast("Product removed"); };
     function openEditPriceModal(productId) { const product = allProducts.find(p => p.id === productId); if(product && product.vendorPhone === currentVendorPhone) { currentEditProductId = productId; document.getElementById('editProductNameDisplay').innerHTML = `Product: ${product.name}`; document.getElementById('editPriceInput').value = product.price; document.getElementById('editPriceModal').style.display = 'flex'; } }
     document.getElementById('closeEditModal').onclick = () => document.getElementById('editPriceModal').style.display = 'none';
     document.getElementById('confirmEditPriceBtn').onclick = () => { if(currentEditProductId) { let newPrice = parseInt(document.getElementById('editPriceInput').value); if(isNaN(newPrice) || newPrice <= 0) alert("Enter a valid price"); else { let idx = allProducts.findIndex(p => p.id === currentEditProductId); if(idx !== -1 && allProducts[idx].vendorPhone === currentVendorPhone) { allProducts[idx].price = newPrice; syncStorage(); renderMarketplace(); loadVendorProducts(); document.getElementById('editPriceModal').style.display = 'none'; showToast("Price updated"); } } } };
-    document.getElementById('publishProductBtn').onclick = () => { if(!currentVendorPhone) alert("Login first"); else { let name = document.getElementById('addProdName').value.trim(); let price = parseInt(document.getElementById('addProdPrice').value); let category = document.getElementById('addProdCategory').value; let desc = document.getElementById('addProdDesc').value.trim(); let icon = document.getElementById('addProdIcon').value.trim() || "✨"; if(!name || isNaN(price) || price <= 0) alert("Valid product name and price required"); else { let vendorInfo = approvedVendors.find(v => v.phone === currentVendorPhone); allProducts.push({ id: Date.now(), name, price, category, description: desc, icon, vendorPhone: currentVendorPhone, vendorName: vendorInfo ? vendorInfo.name : "Merchant" }); syncStorage(); renderMarketplace(); loadVendorProducts(); document.getElementById('addProdName').value = ""; document.getElementById('addProdPrice').value = ""; document.getElementById('addProdDesc').value = ""; showToast("Product published!"); } } };
+    document.getElementById('publishProductBtn').onclick = () => { if(!currentVendorPhone) alert("Login first"); else { let name = document.getElementById('addProdName').value.trim(); let price = parseInt(document.getElementById('addProdPrice').value); let category = document.getElementById('addProdCategory').value; let desc = document.getElementById('addProdDesc').value.trim(); let icon = document.getElementById('addProdIcon').value.trim() || "📦"; if(!name || isNaN(price) || price <= 0) alert("Valid product name and price required"); else { let vendorInfo = approvedVendors.find(v => v.phone === currentVendorPhone); allProducts.push({ id: Date.now(), name, price, category, description: desc, icon, vendorPhone: currentVendorPhone, vendorName: vendorInfo ? vendorInfo.name : "Merchant" }); syncStorage(); renderMarketplace(); loadVendorProducts(); document.getElementById('addProdName').value = ""; document.getElementById('addProdPrice').value = ""; document.getElementById('addProdDesc').value = ""; showToast("Product published!"); } } };
 
     // Admin Panel
     const adminModal = document.getElementById('adminGlobalModal');
@@ -302,11 +344,11 @@
     document.getElementById('adminLoginBtnGlobal').onclick = () => { if(document.getElementById('adminPasswordInput').value === ADMIN_CODE) { document.getElementById('adminSecureContent').style.display = 'block'; loadAdminDashboard(); } else alert("Invalid admin password"); };
     function loadAdminDashboard() {
         const pendingDiv = document.getElementById('pendingVendorsAdminList');
-        pendingDiv.innerHTML = pendingVendors.map((v, idx) => `<div style="background:#fffbeb; padding:14px; border-radius:24px; margin-bottom:12px; border-left: 4px solid #f59e0b;"><div><strong>${escapeHtml(v.name)}</strong><br><span>📞 ${v.phone}</span><br><span>💰 Ref: ${escapeHtml(v.transactionId)}</span><br><span class="status-pending"><i class="fas fa-clock"></i> Pending Approval</span></div><button class="approve-btn" data-approveidx="${idx}" style="margin-top:10px;">✓ Approve Vendor</button></div>`).join("");
+        pendingDiv.innerHTML = pendingVendors.map((v, idx) => `<div style="background:#fffbeb; padding:12px; border-radius:24px; margin-bottom:10px; border-left: 4px solid #f59e0b;"><div><strong>${escapeHtml(v.name)}</strong><br><span>📞 ${v.phone}</span><br><span>💰 Ref: ${escapeHtml(v.transactionId)}</span><br><span class="status-pending"><i class="fas fa-clock"></i> Pending Approval</span></div><button class="approve-btn" data-approveidx="${idx}" style="margin-top:8px;">✓ Approve Vendor</button></div>`).join("");
         if(pendingVendors.length === 0) pendingDiv.innerHTML = "<p style='color:#64748b;'>No pending requests.</p>";
         document.querySelectorAll('[data-approveidx]').forEach(btn => btn.addEventListener('click', (e) => { let idx = parseInt(btn.dataset.approveidx); let vendor = pendingVendors[idx]; if(vendor) { approvedVendors.push({ name: vendor.name, phone: vendor.phone }); pendingVendors.splice(idx,1); syncStorage(); loadAdminDashboard(); renderMarketplace(); showToast(`✓ ${vendor.name} approved! They can now sell.`); } }));
         const approvedDiv = document.getElementById('approvedVendorsAdminList');
-        approvedDiv.innerHTML = approvedVendors.map(v => `<div style="background:#ecfdf5; padding:10px; border-radius:20px; margin-bottom:8px;"><span class="status-approved"><i class="fas fa-check-circle"></i> Verified</span> — <strong>${escapeHtml(v.name)}</strong> (${v.phone})</div>`).join("");
+        approvedDiv.innerHTML = approvedVendors.map(v => `<div style="background:#ecfdf5; padding:8px; border-radius:20px; margin-bottom:6px;"><span class="status-approved"><i class="fas fa-check-circle"></i> Verified</span> — <strong>${escapeHtml(v.name)}</strong> (${v.phone})</div>`).join("");
         if(approvedVendors.length === 0) approvedDiv.innerHTML = "<p style='color:#64748b;'>No approved vendors yet.</p>";
     }
 
@@ -318,4 +360,4 @@
     updateCartUI();
 </script>
 </body>
-</html>
+    </html>            
